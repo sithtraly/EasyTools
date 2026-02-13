@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "lite-server": "^2.6.1",
+    "vue": "^3.5.28"
+  }
+}
