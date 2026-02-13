@@ -96,64 +96,68 @@ createApp({
 				await wb.xlsx.load(buffer)
 
 				const wslength = wb.worksheets.length
-				const ws = wb.worksheets[0]
-				let rows = []
-				rows[0] = ws.getRow(9).values.map(v => v ? v.replaceAll(' ', '') : v)
-				ws.eachRow({ includeEmpty: true }, (row, i) => {
-					if (i > 9 && !isNaN(row.values[1])) rows.push(row.values)
-				})
-				const removeUnusedColumn = (value) => {
-					const i = rows[0].indexOf(value)
-					if (i > -1) rows.map(row => row.splice(i, 1))
-					if (rows[0].includes(value)) removeUnusedColumn(value)
-				}
-				removeUnusedColumn('ចំណាត់ថ្នាក់')
-				removeUnusedColumn('និទ្ទេស')
-				removeUnusedColumn('សរុប')
-				removeUnusedColumn('មធ្យម')
-				removeUnusedColumn('លទ្ធផល')
-				removeUnusedColumn('ច្ប')
-				removeUnusedColumn('អ.ច្ប')
-				removeUnusedColumn('ផ្សេងៗ')
-				removeUnusedColumn(null)
+				for (let i = 0; i < wslength; i++) {
+					const ws = wb.worksheets[i]
+					let rows = []
+					rows[0] = ws.getRow(9).values.map(v => v ? v.replaceAll(' ', '') : v)
+					ws.eachRow({ includeEmpty: true }, (row, i) => {
+						if (i > 9 && !isNaN(row.values[1])) rows.push(row.values)
+					})
 
-				sisSubjectHeaders.forEach((header, headerId) => {
-					const rowHeaderId = rows[0].indexOf(header)
-					if (rowHeaderId > -1) {
-						const colId = headerId + 6
-						if (header != rows[0][headerId + 6]) {
-							rows = rows.map((row, rowId) => {
-								const tmp = row[colId]
-								row[colId] = row[rowHeaderId]
-								row[rowHeaderId] = tmp
-								return row
-							})
-						}
+					// remove unused column
+					const removeUnusedColumn = (value) => {
+						const i = rows[0].indexOf(value)
+						if (i > -1) rows.map(row => row.splice(i, 1))
+						if (rows[0].includes(value)) removeUnusedColumn(value)
 					}
-				})
+					removeUnusedColumn('ចំណាត់ថ្នាក់')
+					removeUnusedColumn('និទ្ទេស')
+					removeUnusedColumn('សរុប')
+					removeUnusedColumn('មធ្យម')
+					removeUnusedColumn('លទ្ធផល')
+					removeUnusedColumn('ច្ប')
+					removeUnusedColumn('អ.ច្ប')
+					removeUnusedColumn('ផ្សេងៗ')
+					removeUnusedColumn(null)
 
-				// fill none score with 0
-				rows = rows.map((row, i) => {
-					row.shift()
-					row = [...row]
-					if (i <= 0) {
-						const fillUndefineItem = () => {
-							if (row.includes(undefined)) {
-								const i = row.lastIndexOf(undefined)
-								row[i] = sisSubjectHeaders[i - 5] || geipScoreHeaders[i - 5]
-								fillUndefineItem()
+					sisSubjectHeaders.forEach((header, headerId) => {
+						const rowHeaderId = rows[0].indexOf(header)
+						if (rowHeaderId > -1) {
+							const colId = headerId + 6
+							if (header != rows[0][headerId + 6]) {
+								rows = rows.map((row, rowId) => {
+									const tmp = row[colId]
+									row[colId] = row[rowHeaderId]
+									row[rowHeaderId] = tmp
+									return row
+								})
 							}
 						}
-						fillUndefineItem()
-					}
-					else {
-						row = row.map((v, i) => v = [null, undefined, '', 'A'].includes(v) && i > 0 ? 0 : v)
-					}
-					return row
-				})
+					})
 
-				const newWs = wb.addWorksheet(`New ${ws.name}`)
-				newWs.insertRows(1, rows)
+					// fill none score with 0
+					rows = rows.map((row, i) => {
+						row.shift()
+						row = [...row]
+						if (i <= 0) {
+							const fillUndefineItem = () => {
+								if (row.includes(undefined)) {
+									const i = row.lastIndexOf(undefined)
+									row[i] = sisSubjectHeaders[i - 5] || geipScoreHeaders[i - 5]
+									fillUndefineItem()
+								}
+							}
+							fillUndefineItem()
+						}
+						else {
+							row = row.map((v, i) => v = [null, undefined, '', 'A'].includes(v) && i > 0 ? 0 : v)
+						}
+						return row
+					})
+
+					const newWs = wb.addWorksheet(`New ${ws.name}`)
+					newWs.insertRows(1, rows)
+				}
 
 				// Download file
 				buffer = await wb.xlsx.writeBuffer()
