@@ -1,3 +1,19 @@
+const $ = document.querySelector.bind(document)
+
+$('button#bt-start').addEventListener('click', () => $('#dialog').showModal())
+$('#dialog').addEventListener('click', e => {
+	const rect = dialog.getBoundingClientRect();
+	const clickedInDialog =
+		rect.top <= e.clientY &&
+		e.clientY <= rect.top + rect.height &&
+		rect.left <= e.clientX &&
+		e.clientX <= rect.left + rect.width;
+
+	if (!clickedInDialog) {
+		$('#dialog').close();
+	}
+})
+
 const {
 	createApp,
 	ref
@@ -137,7 +153,8 @@ createApp({
 				step.value = 1
 				isLoading.value = false
 				files.value = []
-			}, 2)
+				$('#dialog').close()
+			})
 		}
 
 		const validateFile = (file) => {
@@ -172,7 +189,8 @@ createApp({
 			wb.value = await readExcel(files.value[0])
 		}
 
-		const next = async () => {
+		const next = async (e) => {
+			e.stopPropagation()
 			step.value++
 			tabs.value = Object.keys(dataSheets.value)
 			activeTab.value = tabs.value[0]
@@ -217,12 +235,12 @@ createApp({
 					accept=".xlsx, .xlsn, .xlsb, .xls, .xls, .xlsx, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 				/>
 
-				<p>ទាញ ឬចុចដើម្បីបញ្ចូល</p>
-				<p>ឯកសារដែលអាចប្រើបាន: .xlsx, .xlsn, .xlsb, .xls</p>
+				<p class="text-center">ទាញ ឬចុចដើម្បីបញ្ចូល</p>
+				<p class="text-center">ឯកសារដែលអាចប្រើបាន: .xlsx, .xlsn, .xlsb, .xls</p>
 			</label>
 
 			<div class="file-list" v-if="files.length">
-				<h4>Selected Files:</h4>
+				<h2>Selected Files:</h2>
 				<ul>
 					<li v-for="file in files" :key="file.name">
 						{{ file.name }} ({{ Math.round(file.size / 1024) }} KB)
@@ -234,15 +252,15 @@ createApp({
 				<h4>ឯកសារមិនគាំទ្រ</h4>
 				<p>{{error}}</p>
 			</div>
-			<button @click="next()" v-if="files.length" class="bt-primary float-right">បន្ទាប់ &rArr;</button>
+			<button type="button" @click="next" v-if="files.length" class="bt-primary float-right">បន្ទាប់ &rArr;</button>
 		</div>
 
 		<div v-if="step == 2">
-			<p>បញ្ចូលឈ្មោះដែលត្រូវតម្រៀបតាម</p>
+			<h2>បញ្ចូលឈ្មោះដែលត្រូវតម្រៀបតាម</h2>
 			<div class="tabs">
-				<button v-for="tab in tabs" class="tab" :class="{'tab-active': tab == activeTab}" @click="activeTab = tab">{{tab}}</button>
-				<textarea v-for="tab in tabs" :id="tab" v-model="studentsForSort[tab]" :key="tab" style="width: 100%" rows="20" v-show="tab == activeTab">{{studentsForSort[tab]}}</textarea>
-				<button @click="downLoadFile()" class="bt-primary float-right" :disabled="isLoading">
+				<button type="button" v-for="(tab, i) in tabs" class="tab" :class="{'tab-active': tab == activeTab,'last': i == tabs.length - 1}" @click="activeTab = tab">{{tab}}</button>
+				<textarea v-for="tab in tabs" :id="tab" v-model="studentsForSort[tab]" :key="tab" style="width: 100%;border-top-left-radius: 0;" rows="20" v-show="tab == activeTab">{{studentsForSort[tab]}}</textarea>
+				<button type="button" @click="downLoadFile()" class="bt-primary float-right" :disabled="isLoading">
 					<span v-if="!isLoading">ទាញយក &darr;</span>
 					<div style="display: flex;align-items: center;" v-if="isLoading" >
 						<span margin-right: 10px>Downloading</span>
