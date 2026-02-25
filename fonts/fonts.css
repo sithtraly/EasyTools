@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Siemreap&display=swap');
+
+@font-face {
+	font-family: 'Khmer OS Siemreap';
+	src:
+		local('Khmer OS Siemreap Regular'),
+		url(https://fonts.gstatic.com/s/siemreap/v30/Gg82N5oFbgLvHAfNl1YXlg4hLmpf.woff2) format('woff2');
+}
+
+* {
+	font-family: 'Times New Roman', 'Khmer OS Siemreap', Times, serif;
+}

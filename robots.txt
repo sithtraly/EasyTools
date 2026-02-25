@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /libs/
+Sitemap: https://sithtraly.github.io/EasyTools/
