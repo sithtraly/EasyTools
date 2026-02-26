@@ -10,3 +10,19 @@
 * {
 	font-family: 'Times New Roman', 'Khmer OS Siemreap', Times, serif;
 }
+
+.text-center {
+	text-align: center;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-justify {
+	text-align: justify;
+}

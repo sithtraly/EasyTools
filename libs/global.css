@@ -1,0 +1,60 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.m-0 {
+	margin: 0;
+}
+
+.m-1 {
+	margin: 4px;
+}
+
+.m-2 {
+	margin: 8px;
+}
+
+.m-3 {
+	margin: 12px;
+}
+
+.m-4 {
+	margin: 16px;
+}
+
+.m-5 {
+	margin: 20px;
+}
+
+.p-1 {
+	padding: 4px;
+}
+
+.p-2 {
+	padding: 8px;
+}
+
+.p-3 {
+	padding: 12px;
+}
+
+.p-4 {
+	padding: 16px;
+}
+
+.p-5 {
+	padding: 20px;
+}
+
+.vh-100 {
+	height: 100vh;
+}
+
+.vw-100 {
+	width: 100vw;
+}
