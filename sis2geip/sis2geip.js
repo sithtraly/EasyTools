@@ -154,6 +154,7 @@ createApp({
 				isLoading.value = false
 				files.value = []
 				studentsForSort.value = {}
+				tabs.value = []
 				$('#dialog').close()
 			})
 		}
