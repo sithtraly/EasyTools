@@ -153,6 +153,7 @@ createApp({
 				step.value = 1
 				isLoading.value = false
 				files.value = []
+				studentsForSort.value = {}
 				$('#dialog').close()
 			})
 		}
