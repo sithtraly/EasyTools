@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1.0"><meta name=description content="SIS 2 GEIP ឧបករណ៍បម្លែងលទ្ធផលពិន្ទុពីប្រព័ន្ធ SIS ទៅ GEIP។ ជួយលោកគ្រូបង្រៀនក្នុងការកែសម្រួលទិន្នន័យឯកសារ Excel សម្រាប់ងាយស្រួលក្នុងការនាំចូលទៅប្រព័ន្ធ GEIP"><meta name=keywords content="SIS, GEIP, SIS2GEIP, conversion, excel, grade, teacher, classroom management, ឧបករណ៍, បម្លែង, លទ្ធផល, ពិន្ទុ, ដំណោះស្រាយ"><meta name=author content=EasyTools><meta name=robots content="index, follow"><meta name=language content="en, km"><meta property=og:title content="SIS 2 GEIP - Scores Conversion Tool"><meta property=og:description content="Convert student scores from SIS system to GEIP system with ease. A tool designed for teachers to convert scores data between two educational platforms."><meta property=og:type content=website><meta property=og:url content=https://sithtraly.github.io/EasyTools/sis2geip><meta property=og:image content=https://sithtraly.github.io/EasyTools/favicon.ico><meta name=twitter:card content=summary><meta name=twitter:title content="SIS 2 GEIP - Scores Conversion Tool"><meta name=twitter:description content="Convert student scores from SIS to GEIP system easily. Designed for teachers to manage scores data conversion."><title>SIS to GEIP - Grade Conversion Tool</title><link rel=stylesheet href=/sis2geip.cc3b94e8.css><link rel="icon shortcut" href=/favicon.1ce6e3be.ico type=image/x-icon><style>*{box-sizing:border-box;transition:all .25s}body{background:#f4f6f8;padding:40px;font-family:Arial,sans-serif}button{border:none;border-radius:4px}.drop-zone{text-align:center;cursor:pointer;background:#fff;border:2px dashed #999;border-radius:10px;flex-direction:column;justify-content:center;height:500px;padding:40px;transition:all .3s;display:flex}.drop-zone.dragover{background:#eafaf3;border-color:#42b883}.file-list{margin-top:20px}.error{color:red;flex-direction:column;align-items:center;margin-top:20px;display:flex}.bt-primary{color:#fff;background-color:#00f;border:none;border-radius:4px;padding:8px;font-size:large}.bt-primary:hover{background-color:#0000ffc0;font-weight:700;box-shadow:2px 3px 10px gray}.float-right{float:right}button{cursor:pointer}.tab{background-color:#fff;border:1px solid gray;border-bottom:none;border-radius:0;padding:5px 20px}.tab:first-of-type{border-top-left-radius:5px}.tab:last-of-type,.tab.last{border-top-right-radius:5px}.tab:hover{background:#dcdcdc}.tab.tab-active{background-color:#0ff}.loader{border:8px solid #fff;border-top-color:#00f;border-radius:50%;width:30px;height:30px;animation:2s linear infinite spin}@keyframes spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.nav{flex-direction:row;align-items:center;display:flex}.spacing{flex-grow:1}.m-0{margin:0}p{text-indent:2rem;text-align:justify}.text-center{text-align:center!important}dialog{width:unset;border:none;border-radius:8px}dialog::backdrop{opacity:.75;background-color:#dcdcdc}</style><script src=https://unpkg.com/vue@3/dist/vue.global.prod.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.23.0/sweetalert2.min.js></script><body>
+  <div class=container>
+    <div class=nav>
+      <img src=/favicon.1ce6e3be.ico alt=Logo>
+      <h1 class=m-0>SIS 2 GEIP</h1>
+      <span class=spacing></span>
+      <button class=bt-primary style=font-size:unset id=bt-start>ចាប់ផ្ដើម</button>
+    </div>
+
+    <p><strong>SIS 2 GEIP</strong> ជាឧបករណ៍មួយដែលបង្កើតឡើងសម្រាប់លោកគ្រូអ្នកគ្រូដែលធ្វើការបញ្ចូលពិន្ទុក្នុងកម្មវិធី SIS និងនាំចេញមកកាន់កម្មវិធី GEIP ។ ឧបករណ៍នេះជួយសម្រួលដល់លោកគ្រូអ្នកគ្រូក្នុងការកែសម្រួលទិន្នន័យមុនពេលនាំចូលទៅកាន់ GEIP ព្រោះកម្មវិធីទាំងពីរនេះមានជួរឈរ (Columns) ខុសគ្នា ឱ្យបានត្រឹមត្រូវដើម្បីងាយស្រួល និងចំណេញពេលវេលា។</p>
+    <h2>របៀបប្រើប្រាស់៖</h2>
+    <ol>
+      <li>ចុចលើប៊ូតុង «ចាប់ផ្ដើម»</li>
+      <li>បញ្ចូល​ (Upload) ឯកសារ Excel ដែលបាននាំចេញពី SIS</li>
+      <li>ចុចប៊ូតុង «បន្ទាប់»</li>
+      <li>ក្នុងករណីដែលឈ្មោះសិស្សក្នុងឯកសារដែលទាញចេញពី​ SIS ខុសលំដាប់ពីឈ្មោះដែលមានក្នុង GEIP លោកគ្រូអ្នកគ្រូត្រូវចម្លង (Copy) ឈ្មោះចេញពី GEIP និងបិទភ្ជាប់ (Paste) តាមផ្ទាំង (Tab) នីមួយ។ (បើសិនជាដូចគ្នាហើយលោកគ្រូអ្នកគ្រូអាចរំលងចំណុចនេះបាន)</li>
+      <li>ចុចលើប៊ូតុង «ទាញយក»</li>
+      <li>រងចាំបន្តិចឯកសារនឹងទាញយកដោយស្វ័យប្រវត្តិ</li>
+    </ol>
+  </div>
+  <dialog id=dialog>
+    <div id=app></div>
+  </dialog>
+  <script type=module src=/sis2geip.8253639a.js></script>
+
+
