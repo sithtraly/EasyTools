@@ -52,4 +52,4 @@ let e=document.querySelector.bind(document);e("button#bt-start").addEventListene
 			</div>
 		</div>
 	`}).mount("#app");
-//# sourceMappingURL=sis2geip.8253639a.js.map
+//# sourceMappingURL=sis2geip.24fbab04.js.map
