@@ -1,3 +1,5 @@
+import '../styles/global.scss'
+
 const $ = document.querySelector.bind(document)
 
 $('button#bt-start').addEventListener('click', () => $('#dialog').showModal())
@@ -155,6 +157,7 @@ createApp({
 				files.value = []
 				studentsForSort.value = {}
 				tabs.value = []
+				dataSheets.value = {}
 				$('#dialog').close()
 			})
 		}
