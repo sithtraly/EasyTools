@@ -17,6 +17,17 @@ body {
 	width: 100vw;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	a {
+		text-decoration: none;
+	}
+}
+
 p,
 h1,
 h2,
@@ -162,6 +173,18 @@ nav,
 	.spacer {
 		flex-grow: 1;
 	}
+
+	@for $i from 0 through 5 {
+		&.gap-#{$i} {
+			gap: $i * 4px;
+		}
+	}
+
+	@for $i from 0 through 10 {
+		.basis-#{$i} {
+			flex-basis: $i * 10%;
+		}
+	}
 }
 
 .counter {
@@ -175,4 +198,8 @@ nav,
 	position: absolute;
 	left: -24px;
 	text-align: right;
+}
+
+.pointer {
+	cursor: pointer;
 }
