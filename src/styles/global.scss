@@ -60,6 +60,12 @@ h6 {
 p {
 	text-indent: 48px;
 	line-height: 30px;
+
+	@for $i from 0 through 5 {
+		&.indent-#{$i} {
+			text-indent: $i * 48px;
+		}
+	}
 }
 
 button {
@@ -335,4 +341,21 @@ nav,
 
 .float-right {
 	float: right;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+	.primary {
+		color: #0000ff;
+	}
+
+	.danger {
+		color: #ff0000;
+	}
 }

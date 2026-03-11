@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "parcel src/index.html src/**/index.html",
-    "build": "rm -rf dist && parcel build --no-cache src/index.html src/**/index.html --public-url /EasyTools/"
+    "build": "rm -rf dist && parcel build --no-cache src/index.html src/**/index.html --public-url /EasyTools/ && rm -rf dist/*.map"
   },
   "staticFiles": {
     "staticPath": "src/images",
