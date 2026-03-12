@@ -1,0 +1,13 @@
+nav.flex.row.item-center.px-2
+  a(href="/EasyTools/") 
+    img(src='/images/logo.png' alt='Logo')
+  h1.m-0.ml-2
+    if title
+      | #{title}
+    else
+      | Easy Tools
+  
+  span.spacer 
+
+  if elements
+    != elements

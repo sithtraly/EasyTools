@@ -8,7 +8,6 @@ import { currentDate, currentTime } from '../helpers/datetime.helper'
 var result: any
 
 $(function () {
-	$('img.pointer').on('click', function () { location.href = '/EasyTools/' })
 	const scores: any = {
 		'150': [135, 120, 105, 90, 75],
 		// '125': [],

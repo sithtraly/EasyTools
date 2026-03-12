@@ -1,0 +1,26 @@
+doctype html
+
+head
+  meta(charset="UTF-8")
+  meta(name="viewport" content="width=device-width initial-scale=1.0")
+  title Easy Order
+  link(rel="shortcut icon" href="/favicon.ico" type="image/x-icon")
+
+body
+  - let title = "Easy Order"
+  include ../partials/nav.pug
+
+  .container.mt-5
+    .flex.row.gap-5
+      .flex.column.basis-5
+        label(for="targetSort") បញ្ជីត្រូវតម្រៀបតាម
+        textarea#targetSort(rows="15")
+      .flex.column.basis-5
+        label(for="toSort") បញ្ជីដែលត្រូវតម្រៀប
+        textarea#toSort(rows="15")
+    .flex.column.mt-5
+      label(for="sortResult") លទ្ធផល
+      textarea#sortResult(rows="15")
+  
+  include ../partials/footer.pug
+  script(type="module" src="index.ts").

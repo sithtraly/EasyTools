@@ -1,0 +1,33 @@
+doctype html
+
+head
+  meta(charset="UTF-8")
+  meta(name="viewport" content="width=device-width, initial-scale=1.0")
+  title Easy Grade
+  link(rel="shortcut icon" href="/favicon.ico" type="image/x-icon")
+
+body
+  - let title = "Easy Grade"
+  include ../partials/nav.pug
+
+  .container.mt-5
+    div
+      label(for="maxScore") ពិន្ទុសរុប
+      select#maxScore
+        option(value="")
+      label.ml-5(for="isOrder") តម្រៀប
+      input(type="checkbox" id="isOrder")
+    .flex.row.gap-4
+      .flex.column.basis-5
+        label(for="studentList") ឈ្មោះ ភេទ ពិន្ទុ
+        textarea#studentList(rows="15")
+      .flex.column.basis-5
+        label(for="result") លទ្ធផល
+        textarea#result(rows="15" readonly) 
+
+    #total
+    button#copy(hidden) ចម្លង
+    button#downloadCsv(hidden) ទាញយក CSV
+
+  include ../partials/footer.pug
+  script(type="module" src="./index.ts").
