@@ -3,13 +3,18 @@
     "parcel": "parcel",
     "dev": "rm -rf dist && parcel src/index.pug src/**/index.pug",
     "build:parcel": "rm -rf dist && parcel build --no-cache src/index.pug src/**/index.pug --public-url /EasyTools/ && rm -rf dist/*.map",
-    "build:fire": "rm -rf dist && parcel build --no-cache src/index.pug src/**/index.pug && rm -rf dist/*.map && firebase deploy",
-    "build": "pnpm run build:fire && pnpm run build:parcel"
+    "build": "rm -rf dist && parcel build --no-cache src/index.pug src/**/index.pug && rm -rf dist/*.map && firebase deploy"
   },
-  "staticFiles": {
-    "staticPath": "images",
-    "staticOutPath": "images"
-  },
+  "staticFiles": [
+    {
+      "staticPath": "images",
+      "staticOutPath": "images"
+    },
+    {
+      "staticPath": "Ads.txt",
+      "staticOutPath": ""
+    }
+  ],
   "dependencies": {
     "firebase": "^12.10.0",
     "jquery": "^4.0.0",
