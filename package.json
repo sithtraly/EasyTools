@@ -9,6 +9,7 @@
     "staticOutPath": "images"
   },
   "dependencies": {
+    "firebase": "^12.10.0",
     "jquery": "^4.0.0",
     "vue": "^3.5.28"
   },
