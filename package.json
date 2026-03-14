@@ -2,7 +2,9 @@
   "scripts": {
     "parcel": "parcel",
     "dev": "rm -rf dist && parcel src/index.pug src/**/index.pug",
-    "build": "rm -rf dist && parcel build --no-cache src/index.pug src/**/index.pug --public-url /EasyTools/ && rm -rf dist/*.map"
+    "build:parcel": "rm -rf dist && parcel build --no-cache src/index.pug src/**/index.pug --public-url /EasyTools/ && rm -rf dist/*.map",
+    "build:fire": "rm -rf dist && parcel build --no-cache src/index.pug src/**/index.pug && rm -rf dist/*.map && firebase deploy",
+    "build": "pnpm run build:fire && pnpm run build:parcel"
   },
   "staticFiles": {
     "staticPath": "images",
