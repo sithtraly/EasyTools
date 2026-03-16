@@ -1,0 +1,15 @@
+doctype html
+
+head
+  meta(charset="UTF-8")
+  meta(name="viewport" content="width=device-width, initial-scale=1.0")
+  include ../partials/adsence.pug
+  title Easy Team
+  link(rel="shortcut icon" href="/favicon.ico" type="image/x-icon")
+
+body
+  - let title = "Easy Grade"
+  include ../partials/nav.pug
+
+  include ../partials/footer.pug
+  script(type="module" src="./index.ts").
