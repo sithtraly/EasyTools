@@ -50,8 +50,8 @@ html(lang="km")
 					button#bt-show.bt-primary(style="width:100%") មើល
 
 		dialog#dialog
-			div#honor-chart.flex.justify-center
-				.a4.p-c.relative.shadow(style="--w: 2rem")
+			div.flex.justify-center
+				#honor-chart.a4.p-c.relative.shadow(style="--w: 2rem")
 					each i in [1,2,3,4]
 						img(src='/images/frame-1.png' class=`frame frame-${i}` alt="" style=`rotate: ${(i - 1) * 90}deg`)
 					h3.text-center.moul.m-0 ព្រះរាជាណាចក្រកម្ពុជា
@@ -67,28 +67,28 @@ html(lang="km")
 
 					.flex.row.justify-center.mt-2
 						.flex.column.item-center
-							img(src='/images/user.png').photo-card#show-student-1-image
+							img(src='/images/user.png').photo-card#show-student-1-image.mb-2
 							h3#show-student-1-grade.text-center.moul.m-0
 
 					table.w-100
 						tr
 							td
 								.flex.column.item-center
-									img(src='/images/user.png').photo-card#show-student-2-image
+									img(src='/images/user.png').photo-card#show-student-2-image.mb-2
 									h3#show-student-2-grade.text-center.moul.m-0
 							td
 								.flex.column.item-center
-									img(src='/images/user.png').photo-card#show-student-3-image
+									img(src='/images/user.png').photo-card#show-student-3-image.mb-2
 									h3#show-student-3-grade.text-center.moul.m-0
 
 						tr
 							td
 								.flex.column.item-center
-									img(src='/images/user.png').photo-card#show-student-4-image
+									img(src='/images/user.png').photo-card#show-student-4-image.mb-2
 									h3#show-student-4-grade.text-center.moul.m-0
 							td
 								.flex.column.item-center
-									img(src='/images/user.png').photo-card#show-student-5-image
+									img(src='/images/user.png').photo-card#show-student-5-image.mb-2
 									h3#show-student-5-grade.text-center.moul.m-0
 					table.w-100.my-5
 						tr
