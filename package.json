@@ -13,10 +13,19 @@
     {
       "staticPath": "Ads.txt",
       "staticOutPath": ""
+    },
+    {
+      "staticPath": "robots.txt",
+      "staticOutPath": ""
+    },
+    {
+      "staticPath": "sitemap.xml",
+      "staticOutPath": ""
     }
   ],
   "dependencies": {
     "firebase": "^12.10.0",
+    "html-to-image": "^1.11.13",
     "jquery": "^4.0.0",
     "vue": "^3.5.28"
   },
@@ -28,6 +37,7 @@
     "@parcel/transformer-vue": "^2.16.4",
     "@types/jquery": "^4.0.0",
     "parcel": "^2.16.4",
-    "parcel-reporter-static-files-copy": "^1.5.3"
+    "parcel-reporter-static-files-copy": "^1.5.3",
+    "process": "^0.11.10"
   }
 }

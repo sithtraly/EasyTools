@@ -1,0 +1,120 @@
+- const title = "Easy Honor Chart"
+doctype html
+html(lang="km")
+	head
+		meta(charset='UTF-8')
+		meta(name='viewport' content='width=device-width, initial-scale=1.0')
+		meta(charset="UTF-8")
+
+		include ../partials/adsence.pug
+		title= title
+		include ../partials/favicon.pug
+	body
+		include ../partials/nav.pug
+
+		main
+			.container
+				div
+				- let i = 1
+				- const localNumber = ['១','២','៣','៤','៥']
+					div
+						label(for='grade') ថ្នាក់
+						input#grade.ml-2(type="text")
+
+					div
+						label(for='resultFor') សម្រាប់
+						select#resultFor.ml-2
+							for i in ['ខែវិច្ឆិកា','ខែធ្នូ','ខែមករា','ខែកុម្ភៈ','ខែមីនា','ខែមេសា','ខែឧសភា','ខែមិថុនា','ខែកក្កដា','ខែសីហា','ឆមាសទី ១','ឆមាសទី ២','ប្រចាំឆ្នាំ']
+								option(value=`${i}`) #{i}
+					while i <= 5
+						div
+
+							label(for=`student-${i}`) ឈ្មោះសិស្សទី #{localNumber[i - 1]}
+							input.ml-2(id=`student-${i}` type="text")
+
+							label.ml-5(for=`student-${i}-grade`) ចំណាត់ថ្នាក់
+							select.ml-2(id=`student-${i}-grade`)
+								- let j = 1
+									while j <= 5
+										if i == j
+											option(value=`${localNumber[j - 1]}` selected) #{localNumber[j - 1]}
+										else
+											option(value=`${localNumber[j - 1]}`) #{localNumber[j - 1]}
+										- j++
+
+							label.ml-5(for=`student-${i}-image`) រូបថត
+							input.ml-2(id=`student-${i}-image` type="file" accept="image/*")
+							- i++
+
+				.mt-5
+					button#bt-show.bt-primary(style="width:100%") មើល
+
+		dialog#dialog
+			div#honor-chart.flex.justify-center
+				.a4.p-c.relative.shadow(style="--w: 2rem")
+					each i in [1,2,3,4]
+						img(src='/images/frame-1.png' class=`frame frame-${i}` alt="" style=`rotate: ${(i - 1) * 90}deg`)
+					h3.text-center.moul.m-0 ព្រះរាជាណាចក្រកម្ពុជា
+					h4.text-center.moul.m-0 ជាតិ សាសនា ព្រះមហាក្សត្រ
+					h4.text-center.tacteng.m-0 3
+					h4.moul.m-0 មន្ទីអប់រំ យុវជន និងកីឡាខេត្តឧត្តរមានជ័យ
+					h4.moul.m-0 វិទ្យាល័យបន្ទាយអំពិល
+					h4.m-0.moul ថ្នាក់ទី៖ 
+						span#show-grade.moul
+					h2.text-center.moul.m-0 តារាងកិត្តិយស
+					h4.text-center.moul.m-0 សម្រាប់ 
+						span#show-resultFor.moul
+
+					.flex.row.justify-center.mt-2
+						.flex.column.item-center
+							img(src='/images/user.png').photo-card#show-student-1-image
+							h3#show-student-1-grade.text-center.moul.m-0
+
+					table.w-100
+						tr
+							td
+								.flex.column.item-center
+									img(src='/images/user.png').photo-card#show-student-2-image
+									h3#show-student-2-grade.text-center.moul.m-0
+							td
+								.flex.column.item-center
+									img(src='/images/user.png').photo-card#show-student-3-image
+									h3#show-student-3-grade.text-center.moul.m-0
+
+						tr
+							td
+								.flex.column.item-center
+									img(src='/images/user.png').photo-card#show-student-4-image
+									h3#show-student-4-grade.text-center.moul.m-0
+							td
+								.flex.column.item-center
+									img(src='/images/user.png').photo-card#show-student-5-image
+									h3#show-student-5-grade.text-center.moul.m-0
+					table.w-100.my-5
+						tr
+							td
+							td
+							td
+								h3.m-0.text-center
+									span ............ ថ្ងៃទី 
+									span#date
+									span ខែ 
+									span#month
+									span ឆ្នាំ 
+									span#year
+						tr
+							td
+								h3.m-0.text-center បានឃើញ និងឯកភាព
+							td
+							td
+								h3.m-0.moul.text-center គ្រូបន្ទុកថ្នាក់
+						tr.mt-5
+							td 
+								h3.m-0.moul.text-center នាយកសាលា
+							td.w-25
+							td
+			.flex.justify-center.mt-5
+				.flex.row.flex-right.mt-5(style="width: 21cm")
+					button#download.bt-primary ទាញយក
+		script(src='../helpers/link.helper.ts').
+		script(type='module' src='./index.ts').

@@ -155,6 +155,16 @@ dialog::backdrop {
 	}
 }
 
+.p-c {
+	padding: var(--w);
+}
+
+@for $i from 0 through 4 {
+	.w-#{$i*25} {
+		width: 25% * $i;
+	}
+}
+
 .container {
 	width: 100%;
 	padding: 8px;
@@ -200,12 +210,32 @@ nav,
 		justify-content: center;
 	}
 
+	&.flex-right {
+		justify-content: flex-end;
+	}
+
+	&.flex-left {
+		justify-content: flex-start;
+	}
+
 	&.content-center {
 		align-content: center;
 	}
 
 	&.item-center {
 		align-items: center;
+	}
+
+	&.space-between {
+		justify-content: space-between;
+	}
+
+	&.space-around {
+		justify-content: space-around;
+	}
+
+	&.space-evenly {
+		justify-content: space-evenly;
 	}
 
 	.spacer {
@@ -216,6 +246,10 @@ nav,
 		&.gap-#{$i} {
 			gap: $i * 4px;
 		}
+	}
+
+	&gap-c {
+		gap: var(--w);
 	}
 
 	@for $i from 0 through 10 {
@@ -316,6 +350,26 @@ nav,
 	margin-top: 20px;
 }
 
+.relative {
+	position: relative;
+}
+
+.absolute {
+	position: absolute;
+}
+
+.fixed {
+	position: fixed;
+}
+
+.static {
+	position: static;
+}
+
+.sticky {
+	position: sticky;
+}
+
 .error {
 	margin-top: 20px;
 	display: flex;
@@ -337,6 +391,10 @@ nav,
 	box-shadow: 2px 3px 10px gray;
 	background-color: #0000ffc0;
 	font-weight: bold;
+}
+
+.shadow {
+	box-shadow: 0 0 2px gray;
 }
 
 .float-right {
@@ -366,4 +424,42 @@ footer {
 	width: 100%;
 	background: whitesmoke;
 	box-shadow: 0 0 5px gray;
+}
+
+.a4 {
+	width: 21cm;
+	height: 29.7cm;
+	background-color: #ffffff;
+}
+
+.frame {
+	width: 150px;
+	position: absolute;
+	pointer-events: none;
+
+	&.frame-1 {
+		left: 0;
+		top: 0;
+	}
+
+	&.frame-2 {
+		right: 0;
+		top: 0;
+	}
+
+	&.frame-3 {
+		bottom: 0;
+		right: 0;
+	}
+
+	&.frame-4 {
+		bottom: 0;
+		left: 0;
+	}
+}
+
+.photo-card {
+	width: 2.44cm;
+	height: 3.75cm;
+	// border: 1px solid #de1e2b
 }

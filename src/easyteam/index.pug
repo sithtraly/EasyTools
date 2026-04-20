@@ -1,15 +1,89 @@
+- const title = "Easy Team"
 doctype html
+html(lang="km")
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
 
-head
-  meta(charset="UTF-8")
-  meta(name="viewport" content="width=device-width, initial-scale=1.0")
-  include ../partials/adsence.pug
-  title Easy Team
-  link(rel="shortcut icon" href="/favicon.ico" type="image/x-icon")
+    meta(charset="UTF-8")
+    meta(name="description" content="Easy Team ជាឧបករណ៍មួយដែលជួយសម្រួលដល់លោកគ្រូអ្នកដែលចង់បែងចែកសិស្សជាក្រុមតាមបែបជ្រើសរើសដោយចៃដន្យ​ (ប្រូបាប)")
+    meta(name="keywords" content="ឧបករណ៍, បម្លែង, លទ្ធផល, ពិន្ទុ, ដំណោះស្រាយ, ងាយៗ, ងាយ, ឧបករណ៍, Tools, Easy, Easy Team, Group")
+    meta(name="author" content="EasyTools")
+    meta(name="robots" content="index, follow")
+    meta(name="language" content="en, km")
 
-body
-  - let title = "Easy Grade"
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    meta(property="og:title" content="Easy Team")
+    meta(property="og:description" content="Easy Team ជាឧបករណ៍មួយដែលជួយសម្រួលដល់លោកគ្រូអ្នកដែលចង់បែងចែកសិស្សជាក្រុមតាមបែបជ្រើសរើសដោយចៃដន្យ​ (ប្រូបាប)")
+    meta(property="og:type" content="website")
+    meta(property="og:url" content="https://easy-tools-1999.web.app/easyteam")
+    meta(property="og:image" content="https://easy-tools-1999.web.app/images/logo.png")
+
+    <!-- Twitter Card Meta Tags -->
+    meta(name="twitter:card" content="summary")
+    meta(name="twitter:title" content="Easy Team")
+    meta(name="twitter:description" content="Easy Team ជាឧបករណ៍មួយដែលជួយសម្រួលដល់លោកគ្រូអ្នកដែលចង់បែងចែកសិស្សជាក្រុមតាមបែបជ្រើសរើសដោយចៃដន្យ​ (ប្រូបាប)")
+
+
+    include ../partials/adsence.pug
+    title= title
+    link(rel='shortcut icon' href='/favicon.ico' type='image/x-icon')
+
   include ../partials/nav.pug
 
+  main
+    .container
+      .flex.column
+        label(for="txtStudentList") បញ្ជីឈ្មោះសិស្ស
+        textarea#txtStudentList(rows="10")
+          | គឿប បូរ៉ា
+          | ឆុន កាន់លីកា
+          | ឆេង ចន្ដា
+          | ឆៃ ស្រីរត្ន័
+          | ជួត ជិណាផាត់
+          | ឈាត ឆាលី
+          | ឈួត សុភា
+          | ឈើយ ព្រាត់
+          | ដយ ជឿរី
+          | ឌិន បណ្ឌិត
+          | ណុច វិណូ
+          | ណូ ចន្រ្ទា
+          | តី​ ប៊ុន្នី
+          | តោ តៀង
+          | តោម សាន់តា
+          | ថន ថាវីន
+          | ថន សុភឿន
+          | ថា ដាណែត
+          | ថា មករា
+          | ថួន ថាវឬទ្ធិ
+          | ថែន រាត្រី
+          | ទាំ ហាគីន
+          | ធួត ណាវីត
+          | ធើប ថាន្នី
+          | ផើយ កឌី
+          | មករា លីសា
+          | ម៉ួត សង្ហឺ
+          | យង់ ចាន់ដា
+          | យ៉ាន ណាម
+          | យឿត ណារ៉ុង
+          | វួន សុភ័ណ្ឌ
+          | ស៊ីណាត នីសា
+          | សាន រជ្ជកាន
+          | សាលឹម ប្រណី
+          | ស្មុន សីហា
+          | ស្មួត ដាលីន
+          | ហ៊ើន ពុទ្ធី
+          | ហាន ចន្ថា
+          | ហឿត ប៊ូណី
+          | អួង ស្រីរ៉ាន
+          | អឿ ណាងសាវ
+          | ថោយ ឆានុន
+          | យឿត មេសា
+          | យួត ឈុនលី
+          | ណុំ ចាន់ឆេន
+          | ឆាយ ដួងវិរះបុត្រ
+        button#createGroup.bt-primary.mt-2 ចែកក្រុម
   include ../partials/footer.pug
-  script(type="module" src="./index.ts").
+
+  script(src='../helpers/link.helper.ts').
+  script(type='module' src='./index.ts').
