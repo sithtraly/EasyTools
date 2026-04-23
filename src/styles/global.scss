@@ -97,21 +97,25 @@ dialog::backdrop {
 
 @for $i from 0 through 5 {
 	.mx-#{$i} {
-		margin: 0 4px * $i;
+		margin-left: 4px * $i;
+		margin-right: 4px * $i;
 	}
 
 	.px-#{$i} {
-		padding: 0 4px * $i;
+		padding-left: 4px * $i;
+		padding-right: 4px * $i;
 	}
 }
 
 @for $i from 0 through 5 {
 	.my-#{$i} {
-		margin: 4px * $i 0;
+		margin-top: 4px * $i 0;
+		margin-bottom: 4px * $i;
 	}
 
 	.py-#{$i} {
-		padding: 4px * $i 0;
+		padding-top: 4px * $i;
+		padding-bottom: 4px * $i;
 	}
 }
 
@@ -123,9 +127,7 @@ dialog::backdrop {
 	.pt-#{$i} {
 		padding-top: 4px * $i;
 	}
-}
 
-@for $i from 0 through 5 {
 	.mb-#{$i} {
 		margin-bottom: 4px * $i;
 	}
@@ -133,9 +135,7 @@ dialog::backdrop {
 	.pb-#{$i} {
 		padding-bottom: 4px * $i;
 	}
-}
 
-@for $i from 0 through 5 {
 	.ml-#{$i} {
 		margin-left: 4px * $i;
 	}
@@ -143,9 +143,7 @@ dialog::backdrop {
 	.pl-#{$i} {
 		padding-left: 4px * $i;
 	}
-}
 
-@for $i from 0 through 5 {
 	.mr-#{$i} {
 		margin-right: 4px * $i;
 	}
@@ -155,8 +153,66 @@ dialog::backdrop {
 	}
 }
 
+.pt-c {
+	padding-top: var(--w, var(--pt));
+}
+
+.pr-c {
+	padding-right: var(--w, var(--pr));
+}
+
+.pb-c {
+	padding-bottom: var(--w, var(--pb));
+}
+
+.pl-c {
+	padding-left: var(--w, var(--pl));
+}
+
+.py-c {
+	@extend .pt-c, .pb-c;
+}
+
+.px-c {
+	@extend .pr-c, .pl-c;
+}
+
 .p-c {
-	padding: var(--w);
+	@extend .py-c, .px-c;
+}
+
+.mt-c {
+	margin-top: var(--w, var(--mt));
+}
+
+.mr-c {
+	margin-right: var(--w, var(--mr));
+}
+
+.mb-c {
+	margin-bottom: var(--w, var(--mb));
+}
+
+.ml-c {
+	margin-left: var(--w, var(--ml));
+}
+
+.my-c {
+	@extend .mt-c, .mb-c;
+}
+
+.mx-c {
+	@extend .mr-c, .ml-c;
+}
+
+.m-c {
+	@extend .my-c, .mx-c;
+}
+
+.mx-a,
+.mx-auto {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 @for $i from 0 through 4 {
@@ -210,11 +266,13 @@ nav,
 		justify-content: center;
 	}
 
-	&.flex-right {
+	&.flex-right,
+	&.flex-end {
 		justify-content: flex-end;
 	}
 
-	&.flex-left {
+	&.flex-left,
+	&.flex-start {
 		justify-content: flex-start;
 	}
 
@@ -248,8 +306,8 @@ nav,
 		}
 	}
 
-	&gap-c {
-		gap: var(--w);
+	&.gap-c {
+		gap: var(--w, var(--gap));
 	}
 
 	@for $i from 0 through 10 {
@@ -257,6 +315,13 @@ nav,
 			flex-basis: $i * 10%;
 		}
 	}
+}
+
+.bgi-c {
+	background-image: var(--url, var(--img));
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: center;
 }
 
 .counter {
@@ -283,6 +348,18 @@ nav,
 	width: 30px;
 	height: 30px;
 	animation: spin 2s linear infinite;
+}
+
+table {
+	&.border {
+		border-collapse: collapse;
+
+		th,
+		td {
+			border: 1px solid #000000;
+			border-collapse: collapse;
+		}
+	}
 }
 
 /* Keyframes for rotation */
@@ -378,20 +455,34 @@ nav,
 	color: red;
 }
 
-.bt-primary {
-	background-color: #0000ff;
-	color: white;
+.dark {
+	color: #000000;
+}
+
+button {
 	border-radius: 4px;
 	padding: 8px;
 	border: none;
 	font-size: large;
+
+	&:hover {
+		box-shadow: 1px 1px 4px gray;
+		background-color: #f4f4f4c0;
+		font-weight: bold;
+	}
+
+	&.bt-primary {
+		background-color: #0000ff;
+		color: white;
+	}
+
+	&.bt-primary:hover {
+		box-shadow: 1px 1px 4px gray;
+		background-color: #0000ffc0;
+		font-weight: bold;
+	}
 }
 
-.bt-primary:hover {
-	box-shadow: 2px 3px 10px gray;
-	background-color: #0000ffc0;
-	font-weight: bold;
-}
 
 .shadow {
 	box-shadow: 0 0 2px gray;
@@ -409,12 +500,30 @@ h5,
 h6,
 p,
 span {
-	.primary {
+	&.primary {
 		color: #0000ff;
 	}
 
-	.danger {
+	&.danger,
+	&.error {
 		color: #ff0000;
+	}
+
+	&.warn,
+	&.warning {
+		color: #ffbb11
+	}
+}
+
+span {
+	font: inherit;
+	color: inherit;
+	text-decoration: inherit;
+}
+
+@for $i from 1 through 12 {
+	.fs-#{$i} {
+		font-size: $i * 3;
 	}
 }
 
@@ -427,9 +536,10 @@ footer {
 }
 
 .a4 {
-	width: 21cm;
-	height: 29.7cm;
+	width: 794px; //21cm;
+	height: 1123px; //29.7cm;
 	background-color: #ffffff;
+	page-break-after: always;
 }
 
 .frame {
@@ -462,4 +572,11 @@ footer {
 	width: 2.44cm;
 	height: 3.75cm;
 	// border: 1px solid #de1e2b
+}
+
+.bg-c {
+	background-image: var(--bg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100% 100%;
 }

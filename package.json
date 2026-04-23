@@ -1,9 +1,9 @@
 {
   "scripts": {
     "parcel": "parcel",
-    "dev": "rm -rf dist && parcel src/index.pug src/**/index.pug",
-    "build:parcel": "rm -rf dist && parcel build --no-cache src/index.pug src/**/index.pug --public-url /EasyTools/ && rm -rf dist/*.map",
-    "build": "rm -rf dist && parcel build --no-cache src/index.pug src/**/index.pug && rm -rf dist/*.map && firebase deploy"
+    "dev": "node clean.js dist && parcel src/index.pug src/**/index.pug",
+    "build:parcel": "node clean.js && parcel build --no-cache src/index.pug src/**/index.pug --public-url /EasyTools/ --no-source-maps",
+    "build": "node clean.js dist && parcel build --no-cache src/index.pug src/**/index.pug --no-source-maps && firebase deploy"
   },
   "staticFiles": [
     {
@@ -27,6 +27,7 @@
     "firebase": "^12.10.0",
     "html-to-image": "^1.11.13",
     "jquery": "^4.0.0",
+    "jspdf": "^4.2.1",
     "vue": "^3.5.28"
   },
   "devDependencies": {

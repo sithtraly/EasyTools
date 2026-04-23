@@ -1,0 +1,281 @@
+- const title = "Easy Honor Chart"
+doctype html
+html(lang="km")
+	head
+		meta(charset='UTF-8')
+		meta(name='viewport' content='width=device-width, initial-scale=1.0')
+		meta(charset="UTF-8")
+
+		include ../partials/adsence.pug
+		title= title
+		include ../partials/favicon.pug
+		style.
+			.cover-bg {
+				background-image: url('/images/big-frame-1.png');
+				background-size: 100% 100%;
+				background-position: center;
+			}
+			.line {
+				border-top: 6px solid #e0b02e; max-width: 80%;
+			}
+			.arrow {
+				position: relative;
+				height: 10px;
+				width: 6px;
+				background-color: #e0b02e;
+				display: flex;
+				justify-content: center;
+			}
+			.arrow::after {
+				--w: 20px;
+				content: "";
+				position: absolute;
+				width: var(--w);
+				height: 10px;
+				background-color: #e0b02e;
+				clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+				rotate: 180deg;
+				bottom: -10px;
+			}
+	body
+		include ../partials/nav.pug
+
+		main
+			.container
+				div
+					label(for="study-year") ឆ្នាំសិក្សា
+					input#study-year.ml-2
+				div
+					label(for="grade-number") ថ្នាក់ទី
+					select#grade-number.ml-2
+						each i in ['៧', '៨', '៩','១០', '១១', '១២']
+							option(value=i) #{i}
+					select#grade-text.ml-2
+						each i in ['ក', 'ខ', 'គ', 'ឃ', 'ង', 'ច', 'ឆ', 'ជ', 'ឈ', 'ញ']
+							option(value=i) #{i}
+				label(for='names') ឈ្មោះ ភេទ មុខរបរ និង លេខទូសព្ទ (ផ្ដាច់ពីគ្នាដោយ "Tab")
+				br
+				textarea#names(rows="10" cols="100")
+					//- |លោក ហឿ សាឡម	ប្រុស	មេភូមិ	097 28 99 145
+					//- |លោក ឆឺយ សេនា	ប្រុស	គ្រូបង្រៀន	097 71 62 623
+					//- |លោកស្រី ងួន សាវៀត	ស្រី	ប៉ូលិស	097 61 70 738
+					//- |លោក ហ៊ីង រស្មី	ប្រុស	មន្ត្រីសាលាស្រុក	088 59 49 409
+					//- |លោក រិទ្ធ ស័ក្កសិទ្ធ	ប្រុស	សិស្ស	097 94 80 367
+					//- |កញ្ញា សំអៀ ណារិន	ស្រី	សិស្ស	088 78 10 525
+					//- |កញ្ញា សារឹម ខេហា	ស្រី	សិស្ស	066 39 78 75
+
+				-let list = ['ប្រធាន', 'អនុប្រធាន', 'សមាជិកទី១', 'សមាជិកទី២', 'សមាជិកទី៣', 'សមាជិកទី៤', 'សមាជិកទី៥']
+				each i, index in list
+					div
+						label(for=`ko-1-image`) រូបថត #{i}
+						input.ml-2(id=`ko-${index+1}-image` type="file" accept="image/*")
+
+				.mt-5
+					button#view.w-100.bt-primary មើល
+
+		dialog#dialog
+			.flex.item-center.column#document-container(style="background-color: whitesmoke")
+				.a4.page.page-1.mb-2.cover-bg
+					.flex.row.flex-end.pt-c.pr-c(style="--w: 85px;")
+						div
+							//- input(hidden)
+							h1.m-0.text-center.moul.fs-8 ព្រះរាជាណាចក្រកម្ពុជា
+							h2.m-0.text-center.moul.fs-7 ជាតិ សាសនា ព្រះមហាក្សត្រ
+							h1.m-0.text-center.tacteng 3
+					.flex.row.flex-start
+						.flex.column.item-center.mt-c.ml-c(style="--mt: -75px;--ml: 55px;")
+							img(src="/images/btaphs-logo.png" style="width: 166px;")
+							h3.m-0.text-center.moul.fs-7 វិទ្យាល័យ បន្ទាយអំពិល
+					h2.text-center.moul.mb-0.fs-10(style="color: green") សៀវភៅគណៈកម្មការគ្រប់គ្រងថ្នាក់រៀន
+					.flex.row.justify-center
+						img(src="/images/btaphs-bg.jpg" style="width: 570px;box-shadow: -15px 15px 10px darkgray;")
+					.flex.row.justify-center.mt-c(style="--mt: 35px")
+						table
+							tr
+								td
+									h3.m-0.moul ថ្នាក់ទី
+								td
+									h3.m-0 :
+								td
+									h3.m-0.moul.danger
+										span.show-grade-number 
+										span.roboto  <<
+										span.show-grade-text
+										span.roboto >>
+							tr
+								td
+									h3.moul.m-0.mr-c(style="--mr: 40px;") គ្រូបង្រៀនបន្ទុកថ្នាក់
+								td 
+									h3.m-0 :
+								td
+									h3.moul.ko-2-name.m-0(style="color: #0070c0;") 
+							tr
+								td
+									h3.moul.m-0 លេខទូរសព្ទ
+								td 
+									h3.m-0 :
+								td
+									h3.moul.ko-2-phone.m-0 
+							tr
+								td
+									h3.moul.m-0 ប្រធានថ្នាក់
+								td 
+									h3.m-0 :
+								td
+									h3.moul.ko-5-name.m-0(style="color: #0070c0;") 
+							tr
+								td
+									h3.moul.m-0 លេខទូរសព្ទ
+								td 
+									h3.m-0 :
+								td
+									h3.moul.ko-5-phone.m-0 
+					h2.moul.text-center ឆ្នាំសិក្សា 
+						span.show-study-year 
+
+				.a4.page.page-2.mb-2
+					.mt-c(style="--mt: 20px")
+						h1.m-0.my-2.text-center.moul.fs-8 ព្រះរាជាណាចក្រកម្ពុជា
+						h2.m-0.my-2.text-center.moul.fs-7 ជាតិ សាសនា ព្រះមហាក្សត្រ
+						h1.m-0.my-2.text-center.tacteng 3
+						.ml-c(style="--ml:1cm")
+							h2.m-0.moul.fs-6 ការិយាល័យអប់រំ យុវជន និងកីឡានៃរដ្ឋបាលស្រុកបន្ទាយអំពិល
+							h2.m-0.moul.fs-6 វិទ្យាល័យបន្ទាយអំពិល
+							h2.m-0.moul.fs-6 ថ្នាក់ទី 
+								span.show-grade-number 
+								span.roboto  <<
+								span.show-grade-text
+								span.roboto >>
+						h1.m-0.mt-2.moul.text-center.fs-8(style="color: #0000ff") រចនាសម្ព័ន្ធគណៈកម្មការគ្រប់គ្រងថ្នាក់រៀន ថ្នាក់ទី 
+							span.show-grade-number  
+							span.roboto  <<
+							span.show-grade-text 
+							span.roboto >>
+						h1.m-0.mb-2.moul.text-center.fs-8(style="color: #0000ff") ឆ្នាំសិក្សា 
+							span.show-study-year
+					div
+						.flex.row.justify-center
+							.flex.column.item-center
+								img.ko-1-image.photo-card(src="/images/user.png")
+								.flex.column.item-center.bgi-c.pt-3.pb-1.px-c(style="--w: 15px;--img: url('/images/frame-2.png')")
+									h3.text-center.ko-1-name.moul.m-0(style="font-size: 10pt;") លោក អូ សំនាង
+									h3.text-center.moul.m-0.danger(style="font-size: 9pt;")  ប្រធាន
+									h3.text-center.ko-1-phone.moul.m-0(style="font-size: 9pt;") ០៨៨ ៨០២ ២៨១១
+						.flex.row.justify-center.mt-2
+							.flex.column.item-center
+								img.ko-2-image.photo-card(src="/images/user.png")
+								.flex.column.item-center.bgi-c.pt-3.pb-1.px-c(style="--w: 15px;--img: url('/images/frame-2.png')")
+									h3.text-center.ko-2-name.moul.m-0(style="font-size: 10pt;") លោក អូ សំនាង
+									h3.text-center.moul.m-0.danger(style="font-size: 9pt;") អនុប្រធាន
+									h3.text-center.ko-2-phone.moul.m-0(style="font-size: 9pt;") ០៨៨ ៨០២ ២៨១១
+					.mt-2.mx-a.line
+						.flex.row.space-between(style="--gap: 20px")
+							.arrow
+							.arrow
+							.arrow
+							.arrow
+							.arrow
+					.flex.row.gap-c.justify-center.mt-3(style="--gap: 20px")
+						- let i = 1
+						while i <= 5
+							.flex.column.item-center
+								img.photo-card(class='ko-'+(i+2)+'-image' src="/images/user.png" style="width: 2cm;height: 3cm;")
+								.flex.column.item-center.bgi-c.pt-3.pb-1.px-c(style="--w: 10px;--img: url('/images/frame-2.png'); width: 135px;")
+									h3.text-center.moul.m-0(class='ko-'+(i+2)+'-name' style="font-size: 8pt;") លោក អូ សំនាង
+									h3.text-center.moul.m-0(style="color: #0070c0;font-size: 7.5pt;") សមាជិក
+									h3.text-center.fs-4.moul.m-0(class='ko-'+(i+2)+'-phone' style="font-size: 7.5pt;") ០៨៨ ៨០២ ២៨១១
+							- i++
+
+				.a4.page.page-3.mb-2.p-5
+					p.align-justify គណៈកម្មការគ្រប់គ្រងថ្នាក់ទី 
+						span.show-grade-number ១០ 
+						|(
+						span.show-grade-text E
+						|) វិទ្យាល័យ បន្ទាយអំពិល មានសមាសភាពចំនួន ៧ រូប ក្នុងនោះមានតំណាងមាតាបិតាចំនួន ៣ រូប ក្រុមប្រឹក្សាកុមារយុវជន ៣ នាក់ និងគ្រូបន្ទុកថ្នាក់ ១ រូប។ គណៈកម្មការគ្រប់គ្រងថ្នាក់រៀន គឺជាតំណាងឱ្យមាតាបិតា និងអ្នកអាណាព្យាបាលសិស្សក្នុងថ្នាក់ទាំងអស់ ក្នុងការដឹកនាំ និងគ្រប់គ្រងសកម្មភាពរៀនរបស់សិស្ស ការបង្រៀនរបស់គ្រូ និងការកែលម្អបរិស្ថានថ្នាក់រៀន។
+					h3.moul.danger.pl-5 I. សមាសភាពទាំង ០៧ រូប នោះមាន៖
+					- const kn = ['១', '២', '៣', '៤', '៥', '៦', '៧']
+					- const takeCharges = [ "មើលការខុសត្រូវប្រតិបត្តិការរួមក្នុងការធ្វើផែនការ និងអនុវត្តផែនការកែលម្អថ្នាក់រៀន ដើម្បីធានាបានសិស្សរៀនចេះ។", "ការងារផែនការ និងរបាយការណ៍កែលម្អថ្នាក់រៀន។",  "ការងារប្រជុំពិនិត្យតាមដានប្រចាំខែ។", "ការងារហិរញ្ញវត្ថុ និងធនធានសម្រាប់កែលម្អថ្នាក់រៀន។", "ទិន្នន័យរដ្ឋបាលថ្នាក់រៀន។", "ទទួលការជួយសិស្សមកពីគ្រួសារជួបការលំបាក និងមានអំពើហឹង្សា។", "ការគ្រប់គ្រងបរិស្ថានថ្នាក់រៀន និងសាលារៀន។"]
+					- const positions =  ['ប្រធាន', 'អនុប្រធាន', 'សមាជិក', 'សមាជិក', 'សមាជិក', 'សមាជិក', 'សមាជិក']
+					each v, i in kn
+						.flex.row
+							p.m-0(style="text-indent: -160px;padding-left: 160px;") #{kn[i]}. 
+								span(class="ko-"+(i+1)+"-name0")  
+								span.moul(style="color: #0070c0;" class="ko-"+(i+1)+"-name")   
+								|  ភេទ 
+								span(id='ko-'+(i+1)+'-gender') ប្រុស 
+								| មុខរបរ 
+								span(id='ko-'+(i+1)+'-job') អាជីវករ 
+								| ជា
+								span= positions[i] 
+								| លេខទូរសព្ទ(
+								span(class='ko-'+(i+1)+'-phone').danger ០៨៨ ៨០២ ២៨១១
+								|)
+								br
+								string ទទួលបន្ទុក៖ #{takeCharges[i]}
+
+				.a4.page.page-4.mb-2.p-5
+					h3.moul.danger.pl-5 II.	តារាងផែនការសកម្មភាពប្រចាំឆ្នាំ
+					table.mt-2.w-100.border
+						tr
+							th.moul(rowspan="2") សកម្មភាព
+							th.moul(colspan="9") កាលវិភាគ
+						tr
+							th(style="width: 42px") ១១
+							th(style="width: 42px") ១២
+							th(style="width: 42px") ១
+							th(style="width: 42px") ២
+							th(style="width: 42px") ៣
+							th(style="width: 42px") ៤
+							th(style="width: 42px") ៥
+							th(style="width: 42px") ៦
+							th(style="width: 42px") ៧
+						- 
+							const actions = [
+								["១. ចូលរួមក្នុងសកម្មភាពតេស្តដើមឆ្នាំ","✓","","","","","","","",""],
+								["២. ចូលរួមដឹងឮ និងគាំទ្រផែនការសិក្សាឆ្នាំរបស់សិស្ស","✓","","","","","","","",""],
+								["៣. ចូលរួមដឹងឮនិងគាំទ្រផែនការបង្រៀន៣ឆ្នាំរបស់គ្រូ","✓","","","","","","","",""],
+								["៤. ចូលរួមដឹងឮ និងគាំទ្រផែនការបង្រៀន៣ខែរបស់គ្រូ","✓","","✓","","","✓","","","✓"],
+								["៥. ចូលរួមសកម្មភាពកែលម្អថ្នាក់រៀន","✓","✓","","","","","✓","",""],
+								["៦. ប្រជុំពិនិត្យតាមដានលទ្ធផលសិក្សាសិស្សប្រចាំខែ","✓","✓","✓","✓","✓","✓","✓","✓","✓"],
+								["៧. មាតាបិតាមកសង្កេតកូនរៀនក្នុងថ្នាក់បាន២ដង១ឆ្នាំ","✓","","","","","","","",""],
+							]
+						each a in actions
+							tr
+								each b, i in a
+									if i == 0
+										td= b
+									else
+										if b != "✓"
+											td.text-center= b
+										else
+											td.text-center(style="background-color: #8eaadb")= b
+					.flex.row.flex-end
+						div
+							h4#lunarDate.text-center.mb-0.indent-0.text-center
+							h4.m-0.indent-0.text-center បន្ទាយអំពិល  
+								span#normalDate
+							h4.moul.m-0.indent-0.text-center គ្រូបន្ទុកថ្នាក់
+							br
+							br
+							br
+							h4.ko-2-name.moul.text-center.m-0(style="padding-left: 80px;") ធឿត វាសនា
+					.flex.row.flex-start
+						.w-50.pr-5
+							br
+							h4.text-center.m-0 បានឃើញ និងឯកភាព
+							h4.text-center.m-0.moul នាយកសាលា
+							br
+							br
+							br
+							br
+					p.text-center.indent-0 បានឃើញ និងឯកភាព
+					h4.text-center.moul គណៈកម្មការគ្រប់គ្រងសាលារៀន
+				br
+				br
+				.flex.row.flex-end.gap-5(style="width: 21cm;")
+					button#close-dialog បិទ
+					button#download.bt-primary ទាញយក
+
+
+		script(src='../helpers/link.helper.ts').
+		script(type='module' src='./index.ts').

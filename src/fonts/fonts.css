@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Moul&family=Siemreap&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Moul&family=Siemreap&family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
 
 .icon,
@@ -41,9 +41,15 @@
 
 .moul,
 .moul-regular {
-  font-family: "Moul", serif;
-  font-weight: 400;
-  font-style: normal;
+	font-family: "Moul", serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.roboto {
+	font-family: "Roboto", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 400;
 }
 
 
@@ -51,18 +57,22 @@
 	font-family: 'Times New Roman', 'Khmer OS Siemreap', Times, serif;
 }
 
+.align-center,
 .text-center {
 	text-align: center;
 }
 
+.align-left,
 .text-left {
 	text-align: left;
 }
 
+.align-right,
 .text-right {
 	text-align: right;
 }
 
+.align-justify,
 .text-justify {
 	text-align: justify;
 }
