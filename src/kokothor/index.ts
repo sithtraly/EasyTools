@@ -60,7 +60,7 @@ $(function () {
 	})
 	$('#normalDate').text(displayDate())
 
-	$('#close-dialog').on('click', e => {
+	$('.cl6ose-dialog').on('click', e => {
 		($('#dialog')[0] as HTMLDialogElement).close()
 	})
 
@@ -70,12 +70,13 @@ $(function () {
 		const pdf = new jsPDF({
 			unit: 'px',
 			format: 'A4',
+			compress: true,
 		})
 		const pages = document.querySelectorAll('.a4')
 		for (let i = 0; i < pages.length; i++) {
 			const imgData = await toPng(pages[i], {
 				pixelRatio: 2,                   // Sharp / retina quality (you can use 2 or 4)
-				quality: 0.8,
+				quality: 1,
 			})
 			const imgProps = pdf.getImageProperties(imgData);
 			const pdfWidth = pdf.internal.pageSize.getWidth();

@@ -74,11 +74,12 @@ html(lang="km")
 					button#view.w-100.bt-primary មើល
 
 		dialog#dialog
-			.flex.item-center.column#document-container(style="background-color: whitesmoke")
-				.a4.page.page-1.mb-2.cover-bg
+			.flex.row.flex-end
+				button.close-dialog X
+			.flex.item-center.column
+				.a4.page.shadow.mb-2.cover-bg
 					.flex.row.flex-end.pt-c.pr-c(style="--w: 85px;")
 						div
-							//- input(hidden)
 							h1.m-0.text-center.moul.fs-8 ព្រះរាជាណាចក្រកម្ពុជា
 							h2.m-0.text-center.moul.fs-7 ជាតិ សាសនា ព្រះមហាក្សត្រ
 							h1.m-0.text-center.tacteng 3
@@ -133,8 +134,8 @@ html(lang="km")
 					h2.moul.text-center ឆ្នាំសិក្សា 
 						span.show-study-year 
 
-				.a4.page.page-2.mb-2
-					.mt-c(style="--mt: 20px")
+				.a4.page.shadow.mb-2
+					.pt-c(style="--pt: 20px")
 						h1.m-0.my-2.text-center.moul.fs-8 ព្រះរាជាណាចក្រកម្ពុជា
 						h2.m-0.my-2.text-center.moul.fs-7 ជាតិ សាសនា ព្រះមហាក្សត្រ
 						h1.m-0.my-2.text-center.tacteng 3
@@ -186,7 +187,7 @@ html(lang="km")
 									h3.text-center.fs-4.moul.m-0(class='ko-'+(i+2)+'-phone' style="font-size: 7.5pt;") ០៨៨ ៨០២ ២៨១១
 							- i++
 
-				.a4.page.page-3.mb-2.p-5
+				.a4.page.shadow.mb-2.p-5
 					p.align-justify គណៈកម្មការគ្រប់គ្រងថ្នាក់ទី 
 						span.show-grade-number ១០ 
 						|(
@@ -213,7 +214,7 @@ html(lang="km")
 								br
 								string ទទួលបន្ទុក៖ #{takeCharges[i]}
 
-				.a4.page.page-4.mb-2.p-5
+				.a4.page.shadow.mb-2.p-5
 					h3.moul.danger.pl-5 II.	តារាងផែនការសកម្មភាពប្រចាំឆ្នាំ
 					table.mt-2.w-100.border
 						tr
@@ -273,7 +274,7 @@ html(lang="km")
 				br
 				br
 				.flex.row.flex-end.gap-5(style="width: 21cm;")
-					button#close-dialog បិទ
+					button.close-dialog បិទ
 					button#download.bt-primary ទាញយក
 
 
