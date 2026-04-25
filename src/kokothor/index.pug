@@ -68,7 +68,7 @@ html(lang="km")
 				each i, index in list
 					div
 						label(for=`ko-1-image`) រូបថត #{i}
-						input.ml-2(id=`ko-${index+1}-image` type="file" accept="image/*")
+						input.ml-2(id=`ko-${index+1}-image` type="file" accept="image/*" multiple)
 
 				.mt-5
 					button#view.w-100.bt-primary មើល
@@ -203,13 +203,13 @@ html(lang="km")
 								span(class="ko-"+(i+1)+"-name0")  
 								span.moul(style="color: #0070c0;" class="ko-"+(i+1)+"-name")   
 								|  ភេទ 
-								span(id='ko-'+(i+1)+'-gender') ប្រុស 
+								span(class='ko-'+(i+1)+'-gender') ប្រុស 
 								| មុខរបរ 
-								span(id='ko-'+(i+1)+'-job') អាជីវករ 
+								span(class='ko-'+(i+1)+'-job')  
 								| ជា
 								span= positions[i] 
 								| លេខទូរសព្ទ(
-								span(class='ko-'+(i+1)+'-phone').danger ០៨៨ ៨០២ ២៨១១
+								span(class='ko-'+(i+1)+'-phone').danger 
 								|)
 								br
 								string ទទួលបន្ទុក៖ #{takeCharges[i]}
@@ -240,9 +240,9 @@ html(lang="km")
 								["៦. ប្រជុំពិនិត្យតាមដានលទ្ធផលសិក្សាសិស្សប្រចាំខែ","✓","✓","✓","✓","✓","✓","✓","✓","✓"],
 								["៧. មាតាបិតាមកសង្កេតកូនរៀនក្នុងថ្នាក់បាន២ដង១ឆ្នាំ","✓","","","","","","","",""],
 							]
-						each a in actions
+						each ac in actions
 							tr
-								each b, i in a
+								each b, i in ac
 									if i == 0
 										td= b
 									else
@@ -259,7 +259,7 @@ html(lang="km")
 							br
 							br
 							br
-							h4.ko-2-name.moul.text-center.m-0(style="padding-left: 80px;") ធឿត វាសនា
+							h4.ko-2-name.moul.text-center.m-0(style="padding-left: 80px;")
 					.flex.row.flex-start
 						.w-50.pr-5
 							br
@@ -277,6 +277,4 @@ html(lang="km")
 					button.close-dialog បិទ
 					button#download.bt-primary ទាញយក
 
-
-		script(src='../helpers/link.helper.ts').
 		script(type='module' src='./index.ts').
