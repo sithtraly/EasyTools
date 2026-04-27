@@ -11,6 +11,10 @@ import { toPng } from 'html-to-image';
 import jsPDF from 'jspdf';
 
 $(function () {
+	$('.cover-bg')[0].style.backgroundImage = 'url(/images/big-frame-1.png)'
+	console.log($('.cover-bg')[0].style.backgroundImage)
+
+	let isDownloading = false
 	const year = currentYear()
 	if (currentMonth() >= 10) $('#study-year').val(year + '-' + (year + 1))
 	else $('#study-year').val((year - 1) + '-' + year);
@@ -39,8 +43,8 @@ $(function () {
 						if (files[j].name === name) {
 							if (files[j]) {
 								const dataTransfer = new DataTransfer()
-								dataTransfer.items.add(files[j])
-								$('#ko-' + (i + 1) + '-image')[0].files = dataTransfer.files
+								dataTransfer.items.add(files[j]);
+								($('#ko-' + (i + 1) + '-image')[0] as HTMLInputElement).files = dataTransfer.files
 								showImage('.ko-' + (i + 1) + '-image', files[j])
 							}
 							break
@@ -83,6 +87,8 @@ $(function () {
 		})
 
 		$('#download').on('click', async (e) => {
+			if (isDownloading) return
+			isDownloading = true
 			$('#download').html('<div class="px-5"><div class="loader"></div></div>')
 			$('#download').prop('disabled', true);
 			const pdf = new jsPDF({
@@ -92,9 +98,9 @@ $(function () {
 			})
 			const pages = document.querySelectorAll('.a4')
 			for (let i = 0; i < pages.length; i++) {
-				const imgData = await toPng(pages[i], {
-					pixelRatio: 2,                   // Sharp / retina quality (you can use 2 or 4)
-					quality: 1,
+				const imgData = await toPng((pages[i] as HTMLElement), {
+					pixelRatio: 4,                   // Sharp / retina quality (you can use 2 or 4)
+					quality: 2,
 				})
 				const imgProps = pdf.getImageProperties(imgData);
 				const pdfWidth = pdf.internal.pageSize.getWidth();
@@ -102,9 +108,10 @@ $(function () {
 				if (i > 0) pdf.addPage()
 				pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
 			}
-			pdf.save('kokothor-' + new Date().getTime() + '.pdf')
+			pdf.save('kokothor-' + $('#grade-number').val() + '_' + $('#grade-text').val() + new Date().getTime() + '.pdf')
 			$('#download').prop('disabled', false);
 			$('#download').text('ទាញយក')
+			isDownloading = false
 		})
 	}
 })
