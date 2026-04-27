@@ -533,6 +533,6 @@ const KhmerCalendars = (function () {
 
 export default KhmerCalendars;
 
-export function getLunarDate(date) {
-	return new KhmerCalendars(new Date(date || Date.now())).calendars().BuddhistCalendar.dateString
+export function getLunarDate(date = Date.now()) {
+	return new KhmerCalendars(new Date(date)).calendars().BuddhistCalendar.dateString
 }

@@ -4,20 +4,22 @@ import '../helpers/link.helper.ts'
 import '../helpers/dialog.helper.ts'
 
 import $ from 'jquery';
-import { currentMonth, currentYear, displayDate } from '../helpers/datetime.helper';
+import { currentDay, currentMonth, currentYear, displayDate } from '../helpers/datetime.helper';
 import { getLunarDate } from '../helpers/khmercalendar.js';
 import { numberLatinToKhmer } from '../helpers/number.helper.js';
 import { toPng } from 'html-to-image';
 import jsPDF from 'jspdf';
+import { stringPad } from '../helpers/string.helper.js';
 
 $(function () {
 	$('.cover-bg')[0].style.backgroundImage = 'url(/images/big-frame-1.png)'
-	console.log($('.cover-bg')[0].style.backgroundImage)
 
 	let isDownloading = false
 	const year = currentYear()
-	if (currentMonth() >= 10) $('#study-year').val(year + '-' + (year + 1))
-	else $('#study-year').val((year - 1) + '-' + year);
+	if (currentMonth() >= 10) $('#study-year').val(`${year}-${year + 1}`)
+	else $('#study-year').val(`${year - 1}-${year}`);
+
+	$('#create-date').val(`${currentYear()}-${stringPad(currentMonth(), 2, 0)}-${stringPad(currentDay(), 2, 0)}`)
 
 	const showImage = (selector: string, file: File) => {
 		const reader = new FileReader()
@@ -25,7 +27,6 @@ $(function () {
 			$(selector).attr('src', (e.target?.result as any))
 		}
 		reader.readAsDataURL(file)
-		console.log(selector)
 	}
 
 	for (let i = 1; i <= 7; i++) {
@@ -56,62 +57,62 @@ $(function () {
 				showImage('.ko-' + i + '-image', files[0])
 			}
 		})
-
-
-		$('#view').on('click', function () {
-			($('#dialog')[0] as HTMLDialogElement).showModal()
-
-			const people = ($('#names').val() as any).split('\n').filter((p: string) => p.length > 0).map((row: string) => row.split('\t'))
-			$('.show-grade-number').text($('#grade-number').val() + '')
-			$('.show-grade-text').text($('#grade-text').val() + '')
-			people.forEach((person: any, i: number) => {
-				const [call, ...name] = person[0].split(' ')
-				$('.ko-' + (i + 1) + '-name0').text(call + ' ')
-				$('.ko-' + (i + 1) + '-name').text(name.join(' '))
-				$('.ko-' + (i + 1) + '-gender').text(person[1])
-				$('.ko-' + (i + 1) + '-job').text(person[2])
-				$('.ko-' + (i + 1) + '-phone').text(numberLatinToKhmer(person[3]))
-			})
-			$('.show-study-year').text(numberLatinToKhmer($('#study-year').val() + ''))
-
-			$('#lunarDate').text(getLunarDate())
-		});
-
-
-		// ($('#dialog')[0] as HTMLDialogElement).showModal()
-
-		$('#normalDate').text(displayDate())
-
-		$('.close-dialog').on('click', e => {
-			($('#dialog')[0] as HTMLDialogElement).close()
-		})
-
-		$('#download').on('click', async (e) => {
-			if (isDownloading) return
-			isDownloading = true
-			$('#download').html('<div class="px-5"><div class="loader"></div></div>')
-			$('#download').prop('disabled', true);
-			const pdf = new jsPDF({
-				unit: 'px',
-				format: 'A4',
-				compress: true,
-			})
-			const pages = document.querySelectorAll('.a4')
-			for (let i = 0; i < pages.length; i++) {
-				const imgData = await toPng((pages[i] as HTMLElement), {
-					pixelRatio: 4,                   // Sharp / retina quality (you can use 2 or 4)
-					quality: 2,
-				})
-				const imgProps = pdf.getImageProperties(imgData);
-				const pdfWidth = pdf.internal.pageSize.getWidth();
-				const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-				if (i > 0) pdf.addPage()
-				pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
-			}
-			pdf.save('kokothor-' + $('#grade-number').val() + '_' + $('#grade-text').val() + new Date().getTime() + '.pdf')
-			$('#download').prop('disabled', false);
-			$('#download').text('ទាញយក')
-			isDownloading = false
-		})
 	}
+
+
+	$('#view').on('click', function () {
+		($('#dialog')[0] as HTMLDialogElement).showModal()
+
+		const people = ($('#names').val() as any).split('\n').filter((p: string) => p.length > 0).map((row: string) => row.split('\t'))
+		$('.show-grade-number').text($('#grade-number').val() + '')
+		$('.show-grade-text').text($('#grade-text').val() + '')
+		people.forEach((person: any, i: number) => {
+			const [call, ...name] = person[0].split(' ')
+			$('.ko-' + (i + 1) + '-name0').text(call + ' ')
+			$('.ko-' + (i + 1) + '-name').text(name.join(' '))
+			$('.ko-' + (i + 1) + '-gender').text(person[1])
+			$('.ko-' + (i + 1) + '-job').text(person[2])
+			$('.ko-' + (i + 1) + '-phone').text(numberLatinToKhmer(person[3]))
+		})
+
+		$('.show-study-year').text(numberLatinToKhmer($('#study-year').val() as any))
+		$('#lunarDate').text(getLunarDate($('#create-date').val() as any))
+		$('#normalDate').text(displayDate($('#create-date').val() as any))
+	});
+
+	$('.close-dialog').on('click', e => {
+		($('#dialog')[0] as HTMLDialogElement).close()
+	})
+
+	$('#download').on('click', async (e) => {
+		if (isDownloading) return
+		isDownloading = true
+		$('#download').html('<div class="px-5"><div class="loader"></div></div>')
+		$('#download').prop('disabled', true);
+		const pdf = new jsPDF({
+			unit: 'px',
+			format: 'A4',
+			compress: true,
+
+		})
+		const pages = document.querySelectorAll('.a4')
+		for (let i = 0; i < pages.length; i++) {
+			const imgData = await toPng((pages[i] as HTMLElement), {
+				pixelRatio: 3,                   // Sharp / retina quality (you can use 2 or 4)
+				quality: 1,
+				cacheBust: true,
+				skipFonts: false,
+				backgroundColor: '#ffffff',
+			})
+			const imgProps = pdf.getImageProperties(imgData);
+			const pdfWidth = pdf.internal.pageSize.getWidth();
+			const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+			if (i > 0) pdf.addPage()
+			pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
+		}
+		pdf.save(`kokothor-${$('#grade-number').val()}${$('#grade-text').val()}-${new Date().getTime()}.pdf`)
+		$('#download').prop('disabled', false);
+		$('#download').text('ទាញយក')
+		isDownloading = false
+	})
 })

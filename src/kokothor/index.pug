@@ -52,6 +52,9 @@ html(lang="km")
 					select#grade-text.ml-2
 						each i in ['ក', 'ខ', 'គ', 'ឃ', 'ង', 'ច', 'ឆ', 'ជ', 'ឈ', 'ញ']
 							option(value=i) #{i}
+				div
+					label(for="create-date") កាលបរិច្ឆេទធ្វើ (ខែ/ថ្ងៃ/ឆ្នាំ)
+					input#create-date(type="date").ml-2
 				label(for='names') ឈ្មោះ ភេទ មុខរបរ និង លេខទូសព្ទ (ផ្ដាច់ពីគ្នាដោយ "Tab")
 				br
 				textarea#names(rows="10" cols="100")
@@ -205,7 +208,7 @@ html(lang="km")
 								span(class='ko-'+(i+1)+'-gender') ប្រុស 
 								| មុខរបរ 
 								span(class='ko-'+(i+1)+'-job')  
-								| ជា
+								|  ជា
 								span= positions[i] 
 								| លេខទូរសព្ទ(
 								span(class='ko-'+(i+1)+'-phone').danger 
@@ -268,7 +271,7 @@ html(lang="km")
 							br
 							br
 							br
-					p.text-center.indent-0 បានឃើញ និងឯកភាព
+					h4.text-center.indent-0 បានឃើញ និងឯកភាព
 					h4.text-center.moul គណៈកម្មការគ្រប់គ្រងសាលារៀន
 				br
 				br
